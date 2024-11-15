@@ -1,0 +1,129 @@
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/breakpoints" as breakpoints;
+@use "../../styles/partials/text-styles" as text;
+@use "../../styles/partials/resets";
+@use "../../styles/partials/fonts";
+
+.video {
+  &__player {
+    width: 100vw;
+    aspect-ratio: 16/9;
+    background-color: $dark-black;
+  }
+  &__description {
+    padding: 1rem;
+  }
+  &__title {
+    @include text.page-header-mobile;
+    color: $black;
+    margin: 0;
+    padding-bottom: 1rem;
+    font-weight: 600;
+  }
+  &__details-wrapper {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid $mercury;
+    border-bottom: 1px solid $mercury;
+    padding: 0.5rem 0;
+  }
+  &__details-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  &__details-creator {
+    @include text.subheader-mobile;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+  &__details-date,
+  &__metrics-views,
+  &__metrics-likes {
+    @include text.body-copy-mobile;
+    color: $silver;
+  }
+  &__metrics-views,
+  &__metrics-likes {
+    margin: 0.5rem;
+  }
+  &__metrics-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  &__metrics {
+    display: flex;
+    align-items: center;
+    padding-right: 1.5rem;
+  }
+  &__description-text {
+    @include text.body-copy-mobile;
+    margin-bottom: 0;
+    color: $black;
+  }
+}
+
+/* Media queries for tablet */
+
+@include breakpoints.medium {
+  .video {
+    &__player {
+      height: 62vh;
+    }
+    &__description {
+      padding: 1rem 2rem;
+    }
+    &__description-text {
+      @include text.body-copy-desktop-tablet;
+    }
+    &__title {
+      @include text.page-header-desktop-tablet;
+      font-weight: 600;
+      padding-bottom: 0;
+    }
+    &__details-wrapper {
+      border-top: none;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 0;
+    }
+    &__details-container,
+    &__metrics-container {
+      flex-direction: row;
+    }
+    &__details-creator {
+      margin-right: 1.5rem;
+      margin-bottom: 0;
+    }
+    &__details-date,
+    &__metrics-views,
+    &__metrics-likes {
+      @include text.body-copy-mobile;
+    }
+  }
+}
+
+/* Media queries for desktop */
+
+@include breakpoints.large {
+  .video {
+    display: flex;
+    justify-content: center;
+    background-color: $dark-black;
+    width: 100vw;
+    &__player {
+      height: 80vh;
+    }
+    &__description {
+      padding-top: 2rem;
+      padding-left: 6.5rem;
+      padding-right: 0;
+      margin: 0;
+      &-text {
+        padding: 0.5rem 1.5rem 2rem 0;
+      }
+    }
+  }
+}

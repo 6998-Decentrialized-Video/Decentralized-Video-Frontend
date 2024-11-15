@@ -1,0 +1,16 @@
+html,
+body {
+    margin: 0;
+    font-family: "Avenir", sans-serif;
+    box-sizing: border-box;
+}
+
+body::-webkit-scrollbar{
+    display: none;
+  }
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}

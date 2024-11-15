@@ -1,0 +1,10 @@
+@use "../../styles/partials/breakpoints" as breakpoints;
+@use "../../styles/partials/resets";
+
+
+// Media query for desktop layout
+ @include breakpoints.large {
+     .app {
+         display: flex;
+         }
+ }

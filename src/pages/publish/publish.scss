@@ -1,0 +1,47 @@
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/breakpoints" as breakpoints;
+@use "../../styles/partials/resets";
+@use "../../styles/partials/fonts";
+
+.publish {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  &__title {
+    color: $blue;
+    padding: 1rem;
+    &:hover {
+      color: salmon;
+      transition: transform 0.5s ease;
+      transform: scale(1.5);
+    }
+  }
+}
+
+.button {
+  text-transform: uppercase;
+  color: $white;
+  background-color: $blue;
+  border: none;
+  font-weight: 700;
+  padding: 1rem 8rem;
+  border-radius: 0.25rem;
+  height: 8vh;
+  margin: 0 auto;
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+  }
+  &:hover {
+    background-color: $dark-blue;
+    transition: 0.3s ease;
+  }
+}
+
+@include breakpoints.medium {
+  .publish {
+    height: 75vh;
+  }
+}

@@ -1,0 +1,213 @@
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/breakpoints" as breakpoints;
+@use "../../styles/partials/text-styles" as text;
+@use "../../styles/partials/resets";
+@use "../../styles/partials/fonts";
+
+.comments {
+  &__total {
+    @include text.body-copy-mobile;
+    color: $black;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+  &__container {
+    padding: 0 1rem;
+  }
+  &__wrapper {
+    display: flex;
+    gap: 5%;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid $mercury;
+  }
+  &__img {
+    background-image: url(../../assets/Images/user_default.jpg);
+    background-size: cover;
+    border-radius: 50%;
+    height: 2.5rem;
+    width: 2.5rem;
+    margin-top: 1.5rem;
+    flex-shrink: 0;
+  }
+  &__input-title {
+    @include text.labels-buttons-mobile;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+    text-transform: uppercase;
+    color: $silver;
+  }
+  &__text-input {
+    @include text.body-copy-mobile;
+    font-family: Avenir;
+    margin-bottom: 1rem;
+    padding: 0.5rem 5.8rem 3rem 0.5rem;
+    color: $black;
+    border: 0.0625rem solid $mercury;
+    background-color: $alabaster;
+    border-radius: 0.25rem;
+    resize: none;
+    &:focus {
+      outline: 0.125rem solid $blue;
+      box-shadow: 0 0 0.75rem #76a7db;
+    }
+  }
+  &__btn {
+    @include text.labels-buttons-mobile;
+    width: 100%;
+    color: $white;
+    font-family: "Avenir";
+    font-weight: 400;
+    background-color: $blue;
+    border-radius: 0.25rem;
+    height: 2.5rem;
+    border: none;
+    text-transform: uppercase;
+    background-image: url(../../assets/icons/add_comment.svg);
+    background-size: 1rem;
+    background-repeat: no-repeat;
+    background-position: 5%;
+    &:hover {
+      background-color: $dark-blue;
+      transition: 0.3s ease;
+    }
+  }
+  //Styling for individual comments
+  &__container-main {
+    display: flex;
+    border-bottom: 1px solid $mercury;
+  }
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &-container {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0 1rem;
+    }
+    &-logo {
+      flex-shrink: 0;
+      background-color: $mercury;
+      border-radius: 50%;
+      width: 2.5rem;
+      height: 2.5rem;
+      margin-top: 0.8rem;
+      margin-right: 1rem;
+    }
+    &-name {
+      @include text.subheader-mobile;
+      color: $black;
+      font-weight: 600;
+      margin-bottom: 0;
+    }
+    &-date {
+      @include text.subheader-mobile;
+      font-weight: 400;
+      font-size: 0.875rem;
+      color: $silver;
+      margin-bottom: 0;
+    }
+    &-text {
+      @include text.body-copy-mobile;
+      color: $black;
+      margin-top: 0.5rem;
+    }
+  }
+}
+
+/* Media queries for tablet */
+
+@include breakpoints.medium {
+  .comments {
+    &__container {
+      padding: 0 2rem;
+    }
+    &__img {
+      margin-top: 0.5rem;
+      margin-right: 1rem;
+    }
+    &__content {
+      &-container {
+        padding: 0 2rem;
+      }
+      &-main {
+        padding: 0.5rem 0;
+      }
+      &-text,
+      &-name,
+      &-date {
+        @include text.body-copy-desktop-tablet;
+      }
+      &-name {
+        font-weight: 600;
+      }
+    }
+    &__wrapper {
+      padding-bottom: 0.5rem;
+      align-items: center;
+      gap: 0;
+    }
+    &__input-btn-container {
+      display: flex;
+      align-items: center;
+    }
+    &__text-input {
+      width: 61.5vw;
+      height: 2.5rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0;
+    }
+    &__btn {
+      width: 20vw;
+      background-position: 6%;
+      margin-left: 1.5rem;
+      margin-top: 1rem;
+    }
+  }
+}
+
+/* Media queries for desktop */
+
+@include breakpoints.large {
+  .comments {
+    &__container {
+      padding-right: 1.5rem;
+      padding-left: 1rem;
+    }
+    &__total {
+      padding-left: 5.5rem;
+    }
+    &__wrapper {
+      border-bottom: none;
+      justify-content: flex-end;
+    }
+    &__text-input {
+      width: 35vw;
+    }
+    &__img {
+      margin-right: 1.5rem;
+    }
+    &__btn {
+      width: 13vw;
+    }
+    &__container-main {
+      padding: 0.5rem 0;
+      border-top: 1px solid $mercury;
+      border-bottom: none;
+    }
+    &__content {
+      &-container {
+        padding-left: 6.5rem;
+        padding-right: 0;
+      }
+      &-wrapper {
+        padding-right: 1.5rem;
+      }
+      &-logo {
+        margin-right: 2rem;
+      }
+    }
+  }
+}

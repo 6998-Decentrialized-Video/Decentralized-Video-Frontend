@@ -1,0 +1,98 @@
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/breakpoints" as breakpoints;
+@use "../../styles/partials/text-styles" as text;
+@use "../../styles/partials/resets";
+@use "../../styles/partials/fonts";
+
+.videoList {
+  &__container {
+    padding: 0 0.5rem 1rem 0.5rem;
+  }
+  &__title-main {
+    @include text.subheader-mobile;
+    color: $silver;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 1rem 0 1rem 0.5rem;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  &__item {
+    padding: 0.25rem 0.5rem;
+  }
+  &__items-wrapper {
+    display: flex;
+    align-items: center;
+    text-decoration: none
+  }
+  &__title {
+    @include text.subheader-mobile;
+    font-weight: 600;
+    font-size: 0.8125rem;
+    line-height: 1.5rem;
+    color: $black;
+    margin: 0;
+  }
+  &__thumbnail {
+    height: 3.8rem;
+    width: 5.5rem;
+    border-radius: 0.375rem;
+    background-color: $mercury;
+  }
+  &__creator {
+    @include text.body-copy-mobile;
+    color: $black;
+    margin: 0;
+  }
+}
+
+/* Media queries for tablet */
+
+@include breakpoints.medium {
+  .videoList {
+    &__container {
+      padding-left: 1rem;
+      padding-bottom: 0.5em;
+    }
+    &__title-main {
+      @include text.section-header-desktop-tablet;
+      font-weight: 600;
+    }
+    &__title {
+      @include text.section-header-desktop-tablet;
+      font-weight: 600;
+      width: 75%;
+      margin-bottom: 0.3rem;
+    }
+    &__items-wrapper {
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+/* Media queries for desktop */
+
+@include breakpoints.large {
+  .videoList {
+    &__container {
+      width: 35vw;
+      padding-bottom: 3rem;
+      border-left: 1px solid $mercury;
+    }
+    &__thumbnail {
+      height: 4.5rem;
+      width: 7rem;
+    }
+    &__title {
+        @include text.subheader-desktop-tablet;
+        font-weight: 600;
+    }
+    &__creator {
+        @include text.body-copy-desktop-tablet;
+    }
+    &__title-main {
+      padding-top: 2rem;
+    }
+  }
+}

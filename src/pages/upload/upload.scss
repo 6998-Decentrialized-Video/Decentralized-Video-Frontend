@@ -1,0 +1,183 @@
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/breakpoints" as breakpoints;
+@use "../../styles/partials/text-styles" as text;
+@use "../../styles/partials/resets";
+@use "../../styles/partials/fonts";
+
+.upload {
+  &__container {
+    border-top: 1px solid $mercury;
+    padding: 0 1rem;
+  }
+  &__title {
+    @include text.page-header-mobile;
+    color: $black;
+    font-weight: 600;
+    margin-top: 1rem;
+  }
+}
+
+.hero {
+  &__title {
+    @include text.section-header-mobile;
+    color: $silver;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+  }
+  &__img {
+    width: 100%;
+    border-radius: 0.25rem;
+  }
+}
+
+.input {
+  &__label {
+    @include text.labels-buttons-mobile;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+    text-transform: uppercase;
+    color: $silver;
+  }
+  &__body {
+    &--title {
+      @include text.body-copy-mobile;
+      font-family: Avenir;
+      color: $black;
+      border: 0.0625rem solid $mercury;
+      padding: 0.5rem 0 0 1rem;
+      background-color: $alabaster;
+      border-radius: 0.25rem;
+      width: 100%;
+      resize: none;
+      &:focus {
+        outline: 0.125rem solid $blue;
+        box-shadow: 0 0 0.75rem #76a7db;
+      }
+    }
+    &--description {
+      @include text.body-copy-mobile;
+      font-family: Avenir;
+      margin-bottom: 1rem;
+      padding: 0.5rem 5rem 3rem 1rem;
+      color: $black;
+      border: 0.0625rem solid $mercury;
+      background-color: $alabaster;
+      border-radius: 0.25rem;
+      width: 100%;
+      resize: none;
+      &:focus {
+        outline: 0.125rem solid $blue;
+        box-shadow: 0 0 0.75rem #76a7db;
+      }
+    }
+  }
+}
+
+.btn {
+  &__link {
+    text-decoration: none;
+  }
+  &--publish {
+    @include text.labels-buttons-mobile;
+    color: $white;
+    font-weight: 400;
+    font-family: "Avenir";
+    background-color: $blue;
+    border-radius: 0.25rem;
+    height: 2.5rem;
+    border: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    background-image: url(../../assets/icons/publish.svg);
+    background-repeat: no-repeat;
+    background-position: 4%;
+
+    &:hover {
+      background-color: $dark-blue;
+      transition: 0.3s ease;
+    }
+  }
+  &--cancel {
+    color: $blue;
+    margin: 2rem 0;
+    border: none;
+    width: 100%;
+    background-color: $white;
+    text-transform: uppercase;
+  }
+}
+
+@include breakpoints.medium {
+  .upload {
+    &__container {
+      padding: 1rem 2.5rem;
+    }
+    &__title {
+      @include text.page-header-desktop-tablet;
+      font-weight: 600;
+      border-bottom: 1px solid $mercury;
+      padding-bottom: 1.5rem;
+    }
+  }
+  .hero {
+    &__img {
+      width: 50%;
+    }
+  }
+  .btn {
+    &__wrapper {
+      display: flex;
+      flex-direction: row-reverse;
+      border-top: 1px solid $mercury;
+      padding-top: 1rem;
+    }
+    &--publish {
+      width: 20vw;
+    }
+    &--cancel {
+      margin-top: 1rem;
+      width: 25vw;
+    }
+  }
+}
+
+@include breakpoints.large {
+  .upload {
+    &__container {
+      height: 90vh;
+      padding: 1rem 7rem;
+    }
+    &__wrapper {
+      display: flex;
+      justify-content: center;
+    }
+  }
+  .hero {
+    &__img {
+      width: 21rem;
+    }
+  }
+  .input {
+    &__container {
+      padding-left: 1rem;
+    }
+    &__body {
+      &--title {
+        width: 44rem;
+      }
+    }
+  }
+  .btn {
+    &--publish {
+      width: 12vw;
+    }
+    &--cancel {
+      margin-top: 1rem;
+      width: 15vw;
+    }
+  }
+}
