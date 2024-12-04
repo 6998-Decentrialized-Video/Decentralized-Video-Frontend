@@ -1,4 +1,7 @@
 import React from "react";
+
+import {useState} from "react";
+import axios from "axios";
 import "./comments.scss";
 import {useAuth} from "../../context/AuthContext";
 
