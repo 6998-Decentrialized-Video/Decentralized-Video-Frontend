@@ -19,6 +19,7 @@ const Video = () => {
   const [defaultId, setDefaultId] = useState("");
   const [videoDetails, setVideoDetails] = useState({});
   const [videos, setVideos] = useState([]);
+  const [comments, setComments] = useState([]);
 
   const getSelectedVideo = async (videoId) => {
     try {
@@ -56,6 +57,20 @@ const Video = () => {
     getVideoDetails();
   }, []);
 
+  // Fetch comments from the backend
+  const fetchComments = async () => {
+    try {
+      setComments(videoDetails.comments);
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+    }
+  };
+
+  // Refresh comments (used as a prop)
+  const refreshComments = () => {
+    fetchComments();
+  };
+
   return (
     <>
       <Header />
@@ -67,7 +82,10 @@ const Video = () => {
             defaultId={defaultId}
             getSelectedVideo={getSelectedVideo}
           />
-          <CommentBox comments={videoDetails.comments}/>
+          <CommentBox comments={comments}
+            videoCid={videoDetails.video_cid}
+            refreshComments={refreshComments}
+          />
           <Comments comments={videoDetails.comments}/>
         </div>
         <div className="app__wrapper">
