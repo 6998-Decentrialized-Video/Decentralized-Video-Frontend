@@ -2,8 +2,26 @@ import React from "react";
 import "./comments.scss";
 import {useAuth} from "../../context/AuthContext";
 
-const CommentBox = ({comments}) => {
+const CommentBox = ({comments, videoCid, refreshComments}) => {
   const { user } = useAuth();
+  const [commentText, setCommentText] = useState("");
+
+  const handleCommentSubmit = async () => {
+    if (!commentText.trim()) return;
+    try {
+      await axios.post("/addComment", {
+        video_cid: videoCid,
+        comment_text: commentText,
+        profile_pic_url: user?.avatar_url, // Optional profile picture
+      });
+
+      setCommentText(""); // Clear the input
+      refreshComments(); // Refresh the comment list
+    } catch (error) {
+      console.error("Error adding comment:", error.response?.data || error.message);
+    }
+  };
+  
   return (
     <section className="comments__container">
       {comments?.length > 0 ? (
@@ -26,7 +44,7 @@ const CommentBox = ({comments}) => {
             ></textarea>
           </div>
           <div className="comments__btn-wrapper">
-            <button type="submit" className="comments__btn">
+            <button type="submit" className="comments__btn" onClick={handleCommentSubmit}>
               Comment
             </button>
           </div>
