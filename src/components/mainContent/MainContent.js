@@ -5,6 +5,8 @@ import eyeSymbol from "../../assets/icons/views.svg";
 import {useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 const BACK_END_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -14,6 +16,7 @@ const MainContent = ({ videos, getSelectedVideo, defaultId }) => {
   const videoId = params.id ? params.id : defaultId;
   const [isLiked, setIsLiked] = useState(false);
   const [likeCountLive, setLikeCountLive] = useState( 0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (like_count !== undefined) {
@@ -51,6 +54,10 @@ const MainContent = ({ videos, getSelectedVideo, defaultId }) => {
     }
   };
 
+  const goToProfile = () => {
+    navigate(`/profile/${user_id}`); // Navigate to the profile page with user_id
+  };
+
   return (
     <>
       <div className="video__description">
@@ -58,7 +65,15 @@ const MainContent = ({ videos, getSelectedVideo, defaultId }) => {
         <div className="video__details-wrapper">
           <div className="video__details-container">
             <div className="video__details">
-              <span className="video__details-creator">By {user_id}</span>
+              <span
+                  className="video__details-creator"
+                  style={{ cursor: "pointer", color: "blue" }} // Optional: Add styling to indicate it's clickable
+                  onClick={goToProfile} // Add the onClick event
+                >
+                  By {user_id}
+                </span>
+    
+              // <span className="video__details-creator">By {user_id}</span>
             </div>
             <div className="video__details">
               <span className="video__details-date">
