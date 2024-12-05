@@ -57,7 +57,6 @@ const Video = () => {
     getVideoDetails();
   }, []);
 
-  // Fetch comments from the backend
   const fetchComments = async () => {
     try {
       setComments(videoDetails.comments);
@@ -66,7 +65,6 @@ const Video = () => {
     }
   };
 
-  // Refresh comments (used as a prop)
   const refreshComments = () => {
     fetchComments();
   };

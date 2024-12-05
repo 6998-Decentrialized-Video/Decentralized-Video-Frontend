@@ -18,6 +18,20 @@ const MainContent = ({ videos, getSelectedVideo, defaultId }) => {
   const [likeCountLive, setLikeCountLive] = useState( 0);
   const navigate = useNavigate();
 
+  const getHasLiked = async (videoId) => {
+    try {
+      const response = await axios.get(`${BACK_END_URL}/hasLiked`, { params: { video_cid: videoId } });
+      const like_status = response.data.liked;
+      setIsLiked(like_status);
+    } catch (error) {
+      console.log("Failed to fetch like status:", error);
+    }
+  };
+
+  useEffect(() => {
+    getHasLiked(videoId);
+  }, [videoId]);
+
   useEffect(() => {
     if (like_count !== undefined) {
       setLikeCountLive(Number(like_count));
@@ -32,9 +46,9 @@ const MainContent = ({ videos, getSelectedVideo, defaultId }) => {
     if (isLiked) {
       const postUnlike = async () => {
         try {
-          await axios.post(`${BACK_END_URL}/unlike`, { cid: videoId }, {withCredentials: true});
           setIsLiked(false);
           setLikeCountLive(likeCountLive - 1);
+          await axios.post(`${BACK_END_URL}/like`, { video_cid: videoId, status: -1 }, {withCredentials: true});
         } catch (error) {
           console.error('Error recording like:', error);
         }
@@ -43,9 +57,9 @@ const MainContent = ({ videos, getSelectedVideo, defaultId }) => {
     } else {
       const postLike = async () => {
         try {
-          await axios.post(`${BACK_END_URL}/like`, { cid: videoId }, {withCredentials: true});
           setIsLiked(true);
           setLikeCountLive(likeCountLive + 1);
+          await axios.post(`${BACK_END_URL}/like`, { video_cid: videoId , status : 1}, {withCredentials: true});
         } catch (error) {
           console.error('Error recording like:', error);
         }

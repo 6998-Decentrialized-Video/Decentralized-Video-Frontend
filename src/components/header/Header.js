@@ -32,7 +32,6 @@ function Header() {
         const { accessToken, user } = event.data;
         if (accessToken) {
           localStorage.setItem("coinbaseAccessToken", accessToken);
-          localStorage.setItem("isSignedIn", 'true');
           setUser(user);
           setIsSignedIn(true);
           newWindow.close();

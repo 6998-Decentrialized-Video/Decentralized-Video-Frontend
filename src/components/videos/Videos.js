@@ -26,10 +26,9 @@ const Videos = (user_id) => {
                 const availableVideos = await Promise.all(fetchedVideos.map(async (video) => {
                     try {
                         await Promise.race([
-                            client.files.stat(`/ipfs/${video.video_cid}`),
-                            timeout(50)
+                            client.cat(video.video_cid, { length: 1 }),
+                            timeout(5000)
                         ]);
-                        console.log(video)
                         return {
                             id: video.id,
                             title: video.title,
@@ -41,13 +40,13 @@ const Videos = (user_id) => {
                             created_at: video.upload_date
                         };
                     } catch (err) {
-                        // console.warn(`Video with CID ${video.video_cid} not found in local IPFS node or request timed out.`);
+                        console.warn(`Video with CID ${video.video_cid} not found in local IPFS node or request timed out.`);
                         return null;
                     }
                 }));
                 setVideos(availableVideos.filter(video => video !== null));
             } catch (error) {
-                // console.error('Error fetching videos:', error);
+                console.error('Error fetching videos:', error);
                 setErrorMessage('Failed to fetch videos. Please try again later.');
             }
         };

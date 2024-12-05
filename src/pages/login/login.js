@@ -21,25 +21,14 @@ const Login = () => {
             const data = await response.json();
             const coinbaseUrl = data.url;
 
-            const newWindow = window.open(coinbaseUrl, '_blank', 'width=500,height=600');
+            window.location.href = coinbaseUrl;
 
-            window.addEventListener("message", (event) => {
-                if (event.origin !== process.env.REACT_APP_BACKEND_URL) return;
-                const { accessToken, user } = event.data;
-                if (accessToken) {
-                    localStorage.setItem("coinbaseAccessToken", accessToken);
-                    localStorage.setItem("isSignedIn", 'true');
-                    setUser(user);
-                    setIsSignedIn(true);
-                    newWindow.close();
-                    navigate('/');
-                }
-            });
 
         } catch (error) {
             console.error("Error:", error);
         }
     }
+
 
     return (
         <div className="login-container">
