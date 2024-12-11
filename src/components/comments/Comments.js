@@ -1,7 +1,7 @@
 import React from "react";
 import "./comments.scss";
 
-const Comments = ({ comments }) => {
+const Comments = ({ comments, handleDeleteComment, canDelete}) => {
   return (
     <>
       {comments?.length > 0 ? (
@@ -12,7 +12,7 @@ const Comments = ({ comments }) => {
               <div className="comments__item">
                 <div className="comments__content-wrapper">
                   <div className="comments__content">
-                    <h3 className="comments__content-name">{comment.name}</h3>
+                    <h3 className="comments__content-name">{comment.user_id}</h3>
                     <p className="comments__content-date">
                       {new Date(comment.timestamp).toLocaleDateString("en-US", {
                         year: "numeric",
@@ -22,6 +22,14 @@ const Comments = ({ comments }) => {
                     </p>
                   </div>
                   <p className="comments__content-text">{comment.comment}</p>
+                  {canDelete && (
+                    <button
+                    className="comments__delete-btn"
+                    onClick={() => handleDeleteComment(comment._id)}
+                  >
+                    Delete
+                  </button>
+                  )}
                 </div>
               </div>
             </div>

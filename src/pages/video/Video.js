@@ -21,17 +21,73 @@ const Video = () => {
   const [videos, setVideos] = useState([]);
   const [comments, setComments] = useState([]);
 
+  const [loggedInUser, setLoggedInUser] = useState(null);
+
+  const getUserInfo = async () => {
+    try {
+      const response = await axios.get(`${BACK_END_URL}/getUserInfo`);
+      setLoggedInUser(response.data.user_info);
+    } catch (error) {
+      console.error("Error fetching user info:", error);
+    }
+  };
+
+
   const getSelectedVideo = async (videoId) => {
     try {
       const response = await axios.get(`${BACK_END_URL}/video`, { params: { cid: videoId } });
       const video_data = response.data.video_data;
       setVideoDetails(video_data);
+      setComments(video_data.comments);
     } catch (error) {
       console.log("Failed to fetch video data:", error);
     }
   };
 
+  const fetchComments = async () => {
+    try {
+      const response = await axios.get(`${BACK_END_URL}/listComments`, { params: { video_cid: videoDetails.video_cid } });
+      setComments(response.data.comments);
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+    }
+  };
+
+  const refreshComments = () => {
+    if (videoDetails.video_cid) {
+      fetchComments(); 
+    }
+  };
+  
+  // const updateCommentsWithPermissions = (commentsList, videoCreatorId) => {
+  //   if (!loggedInUser) return;
+
+  //   const updatedComments = commentsList.map((comment) => ({
+  //     ...comment,
+  //     canDelete: loggedInUser.id === comment.userId || loggedInUser.id === videoCreatorId,
+  //   }));
+  //   setComments(updatedComments);
+  // };
+
+  const handleDeleteComment = async (commentId) => {
+    try {
+      await axios.post(`${BACK_END_URL}/deleteComment`, {
+        video_cid: videoDetails.video_cid,
+        comment_id: commentId
+      });
+
+      // Update the comments state by filtering out the deleted comment
+      setComments((prevComments) =>
+        prevComments.filter((comment) => comment._id !== commentId)
+      );
+    } catch (error) {
+      console.error("Error deleting comment:", error);
+    }
+  };
+
   useEffect(() => {
+    getUserInfo();
+
     const getVideoList = async () => {
       try {
         const { data } = await axios.get(`${BACK_END_URL}/videos`);
@@ -50,6 +106,10 @@ const Video = () => {
         const response = await axios.get(`${BACK_END_URL}/video`, { params: { cid: id } });
         const video_data = response.data.video_data;
         setVideoDetails(video_data);
+        // updateCommentsWithPermissions(video_data.comments, video_data.creatorId);
+
+        fetchComments(video_data.video_cid); 
+        setComments(video_data.comments);
       } catch (error) {
         console.log(error);
       }
@@ -57,17 +117,7 @@ const Video = () => {
     getVideoDetails();
   }, []);
 
-  const fetchComments = async () => {
-    try {
-      setComments(videoDetails.comments);
-    } catch (error) {
-      console.error("Error fetching comments:", error);
-    }
-  };
-
-  const refreshComments = () => {
-    fetchComments();
-  };
+  
 
   return (
     <>
@@ -80,11 +130,15 @@ const Video = () => {
             defaultId={defaultId}
             getSelectedVideo={getSelectedVideo}
           />
-          <CommentBox comments={comments}
+          <CommentBox 
+            comments={comments}
             videoCid={videoDetails.video_cid}
             refreshComments={refreshComments}
           />
-          <Comments comments={videoDetails.comments}/>
+          <Comments comments={comments}
+            handleDeleteComment={handleDeleteComment}
+            canDelete={true}
+          />
         </div>
         <div className="app__wrapper">
           <VideoList videos={videos} videoDetails={videoDetails} />

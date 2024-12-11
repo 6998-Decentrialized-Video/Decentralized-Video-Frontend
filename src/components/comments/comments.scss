@@ -5,6 +5,25 @@
 @use "../../styles/partials/fonts";
 
 .comments {
+  &__delete-btn {
+    margin-top: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    color: $white;
+    background-color: $mercury;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: auto; 
+    display: block;
+
+    &:hover {
+      background-color: darken($mercury, 10%);
+    }
+  }
+
+
   &__total {
     @include text.body-copy-mobile;
     color: $black;
@@ -76,14 +95,19 @@
   &__container-main {
     display: flex;
     border-bottom: 1px solid $mercury;
+    flex-direction: column;
+    
   }
   &__content {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem; // Space between left and right sections
+    padding: 0.5rem 0; // Add vertical spacing
 
     &-container {
       display: flex;
+      flex-direction: column;
       flex-wrap: wrap;
       padding: 0 1rem;
     }
@@ -108,6 +132,7 @@
       font-size: 0.875rem;
       color: $silver;
       margin-bottom: 0;
+      
     }
     &-text {
       @include text.body-copy-mobile;
