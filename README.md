@@ -39,10 +39,10 @@ touch .env
 Open the `.env` file with your preferred text editor and add the following variables:
 
 ```ini
-REACT_APP_BACKEND_URL=http://localhost:8000/
-REACT_APP_IPFS_URL=http://localhost:5001/
-REACT_APP_IPFS_GATEWAY=http://localhost:8080/
-REACT_APP_FRONTEND_URL=http://localhost:3000/
+REACT_APP_BACKEND_URL=http://localhost:8000/  #or wherever your backend server was deployed
+REACT_APP_IPFS_URL=http://localhost:5001/     #or wherever your IPFS for the backend server was deployed
+REACT_APP_IPFS_GATEWAY=http://localhost:8080/ #or wherever your IPFS for the backend server was deployed
+REACT_APP_FRONTEND_URL=http://localhost:3000/ #or whatever frontend URL you desire
 ```
 
 ## Running the Application
@@ -52,7 +52,7 @@ REACT_APP_FRONTEND_URL=http://localhost:3000/
 npm start
 ```
 
-You should be able to access the application at `http://localhost:3000/`.
+You should be able to access the application at `http://localhost:3000/`, or whatever frontend URL you chose.
 
 Once you have the UI open, you may interact with the backend server using any one of the accessible pages on the UI, including but not limited to: uploading videos, viewing videos, logging in/signing out, checking your profile, liking/commenting on videos.
 
