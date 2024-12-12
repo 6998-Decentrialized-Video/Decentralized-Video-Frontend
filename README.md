@@ -32,26 +32,28 @@ npm install
 
 ## Environment Setup
 
-Create a `.env` file in the `/backend` directory to store environment variables.
+Create a `.env` file in the root directory to store environment variables.
 ```bash
 touch .env
 ```
 Open the `.env` file with your preferred text editor and add the following variables:
 
 ```ini
-# Web3 Configuration
-WEB3_PROVIDER_URI=https://sepolia.infura.io/v3/YOUR_INFURA_PROJECT_ID
-CONTRACT_ADDRESS=YourContractAddress
-PRIVATE_KEY=YourPrivateKey
-
-# Coinbase OAuth Configuration
-COINBASE_CLIENT_ID=YourCoinbaseClientID
-COINBASE_CLIENT_SECRET=YourCoinbaseClientSecret
-COINBASE_REDIRECT_URI=http://localhost:8000/auth/callback
-
-# Flask Configuration
-FLASK_SECRET_KEY=YourFlaskSecretKey
-
-# MongoDB Configuration
-MONGODB_URI=mongodb+srv://<username>:<password>@yourcluster.mongodb.net/?retryWrites=true&w=majority
+REACT_APP_BACKEND_URL=http://localhost:8000/
+REACT_APP_IPFS_URL=http://localhost:5001/
+REACT_APP_IPFS_GATEWAY=http://localhost:8080/
+REACT_APP_FRONTEND_URL=http://localhost:3000/
 ```
+
+## Running the Application
+
+### Start the Node.js application
+```bash
+npm start
+```
+
+You should be able to access the application at `http://localhost:3000/`.
+
+Once you have the UI open, you may interact with the backend server using any one of the accessible pages on the UI, including but not limited to: uploading videos, viewing videos, logging in/signing out, checking your profile, liking/commenting on videos.
+
+Enjoy!
