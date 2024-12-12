@@ -1,4 +1,4 @@
-# BTube - A Decentralized Video Platform（UI）
+# BTube - A Decentralized Video Platform (UI)
 
 This project is the frontend implementation for our decentralized video platform. It interacts with our designated backend server to act as the user interface. The frontend is built using a Javascript React framework.
 
